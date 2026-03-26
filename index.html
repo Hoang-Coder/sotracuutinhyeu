@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sổ Tra Cứu Tình Yêu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </link>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="app.js"></script>
+    <link rel="icon" type="image/x-icon"
+        href="https://img.icons8.com/?size=100&id=16369&format=png&color=000000">
+</head>
+
+<body>
+
+    <div class="retro-ui-box">
+        <h1 class="title-pixel">PINK LOVE<br>SCANNER</h1>
+        <div class="status-bar">Memory: 100% Love Detected</div>
+
+        <div class="input-area">
+            <input autocomplete="off" type="text" id="name1" placeholder="YOUR NAME" maxlength="15">
+            <div class="heart-pixel">♥</div>
+            <input autocomplete="off" type="text" id="name2" placeholder="CRUSH NAME" maxlength="15">
+        </div>
+
+        <button class="btn-pink-retro" id="btnScan" onclick="startPinkScan()">RUN ANALYSIS</button>
+
+        <div class="loading-msg" id="loadBox">
+            <p class="blinking" style="font-size: 0.6rem; color: var(--dark-pink);">CONNECTING HEARTS...</p>
+        </div>
+
+        <div class="result-msg" id="resBox">
+            <div class="score-num"><span id="val">0</span>%</div>
+            <p class="desc-text" id="statusMsg">> CHÚC MỪNG! PHẦN MỀM ĐÃ TÌM THẤY SỰ TƯƠNG THÍCH TUYỆT ĐỐI GIỮA HAI BẠN. ĐÂY LÀ DUYÊN
+                PHẬN!</p>
+            <button onclick="location.reload()"
+                style="background: none; border: none; color: var(--dark-pink); font-size: 0.5rem; margin-top: 15px; cursor: pointer; text-decoration: underline;">[
+                REBOOT SYSTEM ]</button>
+        </div>
+    </div>
+
+    <div id="noticeOverlay">
+        <div class="notice-card">
+            <div class="status-bar" style="margin-bottom: 15px;">! SYSTEM ERROR !</div>
+            <p class="notice-text">
+                THIẾU DỮ LIỆU!<br><img
+                    src="https://img.icons8.com/?size=100&id=4JjLLkQa1ofF&format=png&color=000000"><br>
+                HÃY NHẬP TÊN CHO CẢ<br>
+                BAN & CRUSH
+            </p>
+            <button class="btn-pink-retro" onclick="closeNotice()"
+                style="padding: 10px; font-family: 'VT323', monospace; font-size: large; box-shadow: 0 4px 0px var(--text-color); margin-top: 15px;">
+                [ ĐÃ HIỂU ]
+            </button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

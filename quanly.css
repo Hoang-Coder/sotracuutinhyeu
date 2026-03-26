@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+    --bg-soft-pink: #ffdeeb;
+    --card-pink: #fce4ec;
+    --primary-pink: #ff85a2;
+    --dark-pink: #f06292;
+    --text-color: #ad1457;
+    --white: #ffffff;
+    --pixel-border: 4px;
+
+    /* Font size cho trang Admin */
+    --font-admin-title: clamp(1rem, 5vw, 1.5rem);
+    --font-table-text: clamp(0.9rem, 4vw, 1.1rem);
+    --font-label: clamp(0.6rem, 3vw, 0.75rem);
+}
+
+/* --- RESET & NỀN GRID (Giữ nguyên từ trang chủ) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-soft-pink);
+    font-family: 'VT323', monospace; /* Font chính cho dữ liệu tiếng Việt */
+    padding: clamp(10px, 5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Hiệu ứng Grid chạy vô tận giống trang chủ */
+body::before {
+    content: "";
+    position: fixed;
+    top: -100px; left: -100px;
+    width: calc(100% + 200px); height: calc(100% + 200px);
+    background-image:
+        linear-gradient(var(--primary-pink) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary-pink) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    animation: bgScrollInfinite 3s linear infinite;
+}
+
+@keyframes bgScrollInfinite {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-40px, -40px, 0); }
+}
+
+/* --- CONTAINER QUẢN LÝ --- */
+.admin-box {
+    background: var(--white);
+    width: 100%;
+    max-width: 1000px;
+    border: var(--pixel-border) solid var(--text-color);
+    box-shadow: 10px 10px 0px var(--primary-pink);
+    padding: 20px;
+    position: relative;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: var(--font-admin-title);
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.admin-status {
+    background: var(--text-color);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.rem;
+    padding: 8px;
+    display: inline-block;
+}
+
+/* --- BẢNG DỮ LIỆU --- */
+.table-wrapper {
+    overflow-x: auto; /* Cuộn ngang cho mobile */
+    border: 2px solid var(--primary-pink);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    letter-spacing: 1.5px;
+}
+
+thead {
+    background: var(--card-pink);
+    font-family: 'Press Start 2P', cursive;
+}
+
+th {
+    padding: 15px;
+    font-size: var(--font-label);
+    color: var(--text-color);
+    border-bottom: var(--pixel-border) solid var(--text-color);
+    text-align: left;
+}
+
+td {
+    padding: 20px 15px; /* Tăng padding trên dưới */
+    vertical-align: top; /* Giữ nội dung luôn nằm ở đỉnh ô */
+    padding: 15px;
+    font-size: var(--font-table-text);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--bg-soft-pink);
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background-color: #fff9fb;
+}
+
+tr:hover {
+    background-color: var(--card-pink);
+}
+
+/* --- CHI TIẾT DỮ LIỆU --- */
+.couple-name {
+    font-weight: bold;
+    color: var(--dark-pink);
+}
+
+.score-badge {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    background: var(--primary-pink);
+    color: white;
+    display: inline-block;
+}
+
+/* --- CẬP NHẬT CHI TIẾT LỜI CHÚC --- */
+.msg-preview {
+    font-size: var(--font-table-text); /* Tăng kích thước chữ to rõ ràng */
+    line-height: 1.6;                      /* Khoảng cách dòng thoáng hơn */
+    color: var(--text-color);
+    font-style: normal;                    /* Bỏ in nghiêng để font VT323 nét hơn */
+    /* QUAN TRỌNG: Cho phép xuống dòng và giữ định dạng */
+    white-space: pre-wrap;                 
+    word-break: break-word;                
+    
+    padding: 10px;
+    margin-top: 5px;
+    display: block;
+}
+
+.time-stamp {
+    font-size: 0.8rem;
+    color: #ad1457;
+    opacity: 0.7;
+}
+
+/* --- NÚT BẤM QUẢN TRỊ --- */
+.refresh-btn {
+    font-family: 'Press Start 2P', cursive;
+    background: var(--primary-pink);
+    color: white;
+    border: 3px solid var(--text-color);
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px var(--text-color);
+    margin-bottom: 20px;
+    font-size: var(--font-btn);
+}
+
+.refresh-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--text-color);
+}

@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+    /* --- 1. MÀU SẮC CHỦ ĐẠO --- */
+    --bg-soft-pink: #ffdeeb;
+    --card-pink: #fce4ec;
+    --primary-pink: #ff85a2;
+    --dark-pink: #f06292;
+    --text-color: #ad1457;
+    --white: #ffffff;
+    --pixel-border: 4px;
+
+    /* --- 2. CỠ CHỮ RESPONSIVE (Sử dụng clamp) --- */
+    --font-title: clamp(0.9rem, 4vw, 1.2rem);
+    --font-input: clamp(1.2rem, 5.5vw, 1.8rem);
+    --font-btn: clamp(0.7rem, 3.5vw, 0.9rem);
+    --font-score: clamp(2.8rem, 12vw, 4.5rem);
+    --font-desc: clamp(0.8rem, 4vw, 1.1rem);
+    --font-status: clamp(0.5rem, 2.5vw, 0.65rem);
+}
+
+/* --- 3. RESET & NỀN GRID --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Khóa chết thanh cuộn toàn trang */
+    position: relative;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-soft-pink);
+    margin: 0;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: calc(100% + 200px);
+    height: calc(100% + 200px);
+
+    background-image:
+        linear-gradient(var(--primary-pink) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary-pink) 1px, transparent 1px);
+    background-size: 40px 40px;
+
+    will-change: transform;
+    z-index: -1;
+    /* Đẩy ra sau cùng */
+
+    animation: bgScrollInfinite 3s linear infinite;
+}
+
+@keyframes bgScrollInfinite {
+    0% {
+        /* Bắt đầu */
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        /* Di chuyển lên trên bên trái 50px (khớp với background-size) */
+        /* Sử dụng translate3d để kích hoạt gia tốc phần cứng */
+        transform: translate3d(-40px, -40px, 0);
+    }
+}
+
+/* --- 4. CONTAINER CHÍNH --- */
+.retro-ui-box {
+    background: var(--white);
+    padding: clamp(30px, 8vw, 50px) clamp(20px, 5vw, 30px);
+    border: var(--pixel-border) solid var(--text-color);
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    position: relative;
+    box-shadow: 10px 10px 0px var(--primary-pink);
+    z-index: 1;
+}
+
+.title-pixel {
+    font-size: var(--font-title);
+    color: var(--text-color);
+    margin-bottom: 15px;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.status-bar {
+    background: var(--primary-pink);
+    color: white;
+    font-size: var(--font-status);
+    padding: 10px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- 5. Ô NHẬP LIỆU (INPUT) --- */
+.input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    text-transform: uppercase;
+    width: 100%;
+    padding: clamp(12px, 4vw, 18px);
+    border: var(--pixel-border) solid var(--text-color);
+    background: var(--white);
+    font-family: "VT323", monospace;
+    font-size: var(--font-input);
+    color: var(--text-color);
+    outline: none;
+    letter-spacing: 2px;
+    box-shadow: inset 4px 4px 0px var(--bg-soft-pink);
+    image-rendering: pixelated;
+    transition: background 0.2s;
+}
+
+input[type="text"]:focus {
+    background: var(--card-pink);
+    border-color: var(--dark-pink);
+}
+
+.heart-pixel {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    color: var(--primary-pink);
+    margin: 10px 0;
+    animation: heartAnim 0.8s steps(2) infinite;
+    display: inline-block;
+}
+
+/* --- 6. NÚT BẤM --- */
+.btn-pink-retro {
+    background: var(--primary-pink);
+    color: white;
+    border: var(--pixel-border) solid var(--text-color);
+    padding: clamp(15px, 5vw, 20px);
+    width: 100%;
+    font-size: var(--font-btn);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 6px 0px var(--text-color);
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+}
+
+.btn-pink-retro:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px var(--text-color);
+}
+
+.btn-pink-retro:disabled {
+    background: #ccc;
+    border-color: #888;
+    box-shadow: 0 4px 0px #666;
+    cursor: not-allowed;
+}
+
+/* --- 7. KẾT QUẢ & LOADING --- */
+.loading-msg,
+.result-msg {
+    display: none;
+    margin-top: 25px;
+    border-top: 4px dashed var(--primary-pink);
+    padding-top: 25px;
+}
+
+.score-num {
+    font-size: var(--font-score);
+    color: var(--dark-pink);
+    text-shadow: 4px 4px 0px var(--white), 8px 8px 0px var(--primary-pink);
+    margin: 10px 0;
+}
+
+.desc-text {
+    font-family: 'VT323', monospace;
+    font-size: var(--font-desc);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-top: 15px;
+    background: var(--card-pink);
+    padding: 15px;
+    border: 2px solid var(--primary-pink);
+}
+
+/* --- 8. NOTICE BOX (FIXED & RESPONSIVE) --- */
+#noticeOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.notice-card {
+    background: var(--white);
+    padding: 30px 20px;
+    border: var(--pixel-border) solid var(--text-color);
+    width: 85%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 8px 8px 0px var(--dark-pink);
+    position: relative;
+    /* Đã sửa lỗi căn giữa */
+    animation: retroPop 0.3s ease-out forwards;
+}
+
+.notice-text {
+    font-family: "VT323", monospace;
+    font-size: var(--font-desc);
+    color: var(--text-color);
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
+
+/* --- 9. ANIMATIONS --- */
+@keyframes heartAnim {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes blinkText {
+    50% {
+        opacity: 0;
+    }
+}
+
+.blinking {
+    animation: blinkText 0.5s steps(1) infinite;
+}
+
+@keyframes retroPop {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
