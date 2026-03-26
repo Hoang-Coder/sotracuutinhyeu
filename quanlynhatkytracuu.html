@@ -6,20 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NHẬT KÝ TRA CỨU</title>
     <link rel="stylesheet" href="quanly.css">
-    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=16369&format=png&color=000000" type="image/x-icon">
+    <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=16369&format=png&color=000000"
+        type="image/x-icon">
 </head>
 
 <body>
+    <div id="loginOverlay">
+        <div class="login-card">
+            <h2>ADMIN ACCESS</h2>
+            <form id="loginForm">
+                <input type="password" id="adminPass" class="login-input" placeholder="ENTER PASSWORD..." required>
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+        </div>
+    </div>
 
-
-    <div class="admin-box">
+    <div class="admin-box" id="adminContent">
         <div class="admin-header">
             <h1 class="admin-title">LOVE DATABASE</h1>
             <div class="admin-status">AUTHORIZED ACCESS ONLY</div>
         </div>
 
-        <button class="refresh-btn" onclick="location.reload()">REFRESH LOGS</button>
-
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" autocomplete="off" placeholder="SEARCH COUPLE..." onkeyup="filterTable()">
+            <button class="control-btn search-submit-btn" onclick="filterTable()">FIND</button>
+            <button class="refresh-btn" onclick="location.reload()">REFRESH</button>
+        </div>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -27,19 +39,37 @@
                         <th style="width: 15%;">TIME</th>
                         <th style="width: 25%;">COUPLE</th>
                         <th style="width: 10%;">SCORE</th>
-                        <th style="width: 50%;">ANALYSIS</th> ```
+                        <th style="width: 50%;">ANALYSIS</th>
                     </tr>
                 </thead>
-                <tbody id="logTableBody">
-                </tbody>
+                <tbody id="logTableBody"></tbody>
             </table>
         </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-
     <script src="app.js"></script>
+
+    <script>
+        // Xử lý Logic đăng nhập tại đây
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPass').value;
+
+            // THAY ĐỔI MẬT KHẨU TẠI ĐÂY
+            if (pass === 'dunghoitao123') {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+
+                // Sau khi đăng nhập thành công mới gọi hàm lấy dữ liệu từ app.js
+                loadDatabase();
+            } else {
+                alert('Mật khẩu sai rồi bạn ơi! ❌');
+                document.getElementById('adminPass').value = '';
+            }
+        });
+    </script>
 </body>
 
 </html>

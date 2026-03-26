@@ -12,7 +12,7 @@
 
     /* --- 2. CỠ CHỮ RESPONSIVE (Sử dụng clamp) --- */
     --font-title: clamp(0.9rem, 4vw, 1.2rem);
-    --font-input: clamp(1.2rem, 5.5vw, 1.8rem);
+    --font-input: clamp(1.1rem, 5.4vw, 1.7rem);
     --font-btn: clamp(0.7rem, 3.5vw, 0.9rem);
     --font-score: clamp(2.8rem, 12vw, 4.5rem);
     --font-desc: clamp(0.8rem, 4vw, 1.1rem);
@@ -32,7 +32,7 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-y: hidden;
     /* Khóa chết thanh cuộn toàn trang */
     position: relative;
 }
@@ -124,21 +124,20 @@ body::before {
 input[type="text"] {
     text-transform: uppercase;
     width: 100%;
-    padding: clamp(12px, 4vw, 18px);
+    padding: clamp(12px, 5vw, 20px);
     border: var(--pixel-border) solid var(--text-color);
     background: var(--white);
     font-family: "VT323", monospace;
     font-size: var(--font-input);
     color: var(--text-color);
     outline: none;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     box-shadow: inset 4px 4px 0px var(--bg-soft-pink);
     image-rendering: pixelated;
     transition: background 0.2s;
 }
 
 input[type="text"]:focus {
-    background: var(--card-pink);
     border-color: var(--dark-pink);
 }
 
@@ -272,3 +271,4 @@ input[type="text"]:focus {
         opacity: 1;
     }
 }
+
